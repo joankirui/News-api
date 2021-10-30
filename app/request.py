@@ -1,7 +1,7 @@
 from app import app
 import urllib.request,json
 
-from app.articles_test import Articles
+from app.articles_test import Articles,Sources
 from .models import articles
 
 Articles = articles.Articles
@@ -65,5 +65,30 @@ def get_sources(category):
         if get_sources_response['sources']:
             sources_results_list = get_sources_response['sources']
             sources_results = process_sources(sources_results_list)
+
+    return sources_results
+
+def process_sources(sources_list):
+    '''
+    Function that processes the sources result and transform them to a list of objects
+
+    Args:
+        sources_list: A list of dictionaries that contain source details
+
+    Returns:  
+        sources_results: A list of source objects
+    '''
+    sources_results = []
+    for source_item in sources_list:
+        id = source_item.get('id')
+        name = source_item.get('name')
+        description = source_item.get('description')
+        url = source_item.get('url')
+        category = source_item.get('category')
+        language = source_item.get('language')
+        country = source_item.get('country')
+
+        source_object = Sources(id,name,description,url,category,language,country)
+        sources_results.append(source_object)
 
     return sources_results
