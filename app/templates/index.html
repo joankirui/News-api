@@ -1,3 +1,4 @@
+<!-- {% import 'macros.html' as macro%} -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,6 +10,29 @@
         {% endif %}
     </head>
     <body>
-
+        <h3> General News </h3>
+        <ul>
+            {% for general_news in general %}
+                <p>{{ general_news.name}}</p>
+                <p>{{ general_news.description }}</p>
+                <p>{{ general_news.url }}</p>
+            {% endfor %}
+        </ul>
+        <h3> Business news </h3>
+        <ul>
+            {% for business_news in business %}
+                <p>{{ business_news.name }}</p>
+                <p>{{ business_news.description }}</p>
+                <p>{{ business_news.url}}</p>
+            {% endfor %}
+        </ul>
+        <h3> Sports news </h3>
+        <ul>
+            {% for sports_news in sports %}
+                <p>{{sports_news.name}}</p>
+                <p>{{sports_news.description}}</p>
+                <p>{{sports_news.url}}</p>
+            {% endfor %}
+        </ul>
     </body>
 </html>
