@@ -6,33 +6,27 @@
     {{ super() }}
     <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
 {% endblock %}
-<!-- Content block -->
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        {% if title %}
-        <title> {{ title }}</title>
-        {% else %}
-        <title> Welcome to the best News Bulletin website </title>
-        {% endif %}
-    </head>
-    <body>
-        <!-- Content block -->
-        {% block content %}
 
-        <h3> General News </h3>
-        <ul>
-            {{ macro.display_sources(general)}}
-        </ul>
-        <h3> Business news </h3>
-        <ul>
-            {{ macro.display_sources(business)}}
-        </ul>
-        <h3> Sports news </h3>
-        <ul>
-            {{macro.display_sources(sports)}}
-        </ul>
-        {% endblock%}
-    </body>
-</html>
+<!-- Content block -->
+{% block content %}
+<div class="container">
+    <form>
+        <input type="text" name="article_query" placeholder="Search for Articles" class="form-control">
+        <input type="submit"  value="Submit" class="btn btn-default">
+    </form>
+
+</div>
+<div class="container-fluid" id="allsources">
+    <div class="overlay">
+
+        <h2 class="text-center font-weight-bold headers"> General News </h2>
+        {{ macro.display_sources(general)}}
+        <h2 class="text-center font-weight-bold headers"> Business news </h2>
+        {{ macro.display_sources(business)}}
+
+        <h2 class="text-center font-weight-bold headers"> Sports news </h2>
+        {{macro.display_sources(sports)}}
+    </div>
+</div>
+{% endblock%}
+    
