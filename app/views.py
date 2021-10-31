@@ -15,6 +15,8 @@ def index():
     business_news = get_sources('business')
     sports_news = get_sources('sports')
 
+    search_articles = request.args.get('article_query')
+
     if search_articles:
         return redirect(url_for('search',article_name=search_articles))
     else:
