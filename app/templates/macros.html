@@ -1,8 +1,17 @@
 {% macro display_sources(sources_list) %}
-
-    {% for news in sources_list %}
-        <li>{{ news.name}}</li>
-        <li>{{ news.description }}</li>
-        <li>{{ news.url }}</li>
-    {% endfor %}
+    <div class="container-fluid">
+        <div class="card-columns">
+            {% for news in sources_list %}
+            <div class="card sourcecard">-
+                <div class="card-header" id="sourcename">
+                    <h4><a href="/index/{{news.id}}">{{ news.name}}</a></h4>
+                </div>
+                <div class="card-body">
+                    <p class="desc">{{ news.description }}</p>
+                    <a href="{{news.url}}"><button class="btn btn-sm btn-outline" id="visit">Visit {{news.name}}</button></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</div>
 {% endmacro %}
