@@ -1,4 +1,4 @@
-from flask import render_template,request,redirect,url_for
+from flask import render_template
 from app import app
 from app.models import articles,sources
 from .request import get_sources,get_articles,search_articles
@@ -15,22 +15,17 @@ def index():
     business_news = get_sources('business')
     sports_news = get_sources('sports')
 
-    search_articles = request.args.get('article_query')
-
-    if search_articles:
-        return redirect(url_for('search',article_name=search_articles))
-    else:
-        return render_template('index.html', title = title,general=general_news,business=business_news,sports=sports_news)
+    return render_template('index.html', title = title,general=general_news,business=business_news,sports=sports_news)
 
 @app.route('/NewsArticles')
 def NewsArticles():
     """
     View that would return news articles
-     
     """
-    health_articles = get_articles('health')
-    education_articles = get_articles('technology')
-    return render_template('articles.html',health=health_articles, tech =education_articles)
+    tesla_news = get_articles('tesla')
+    apple_news = get_articles('apple')
+
+    return render_template('articles.html',tesla = tesla_news,apple = apple_news)
 
 @app.route('/search/<article_name>')
 def articleSearch(article_name):
@@ -40,6 +35,5 @@ def articleSearch(article_name):
     search_article_name = article_name.split(" ")
     search_name_format = "+".join(search_article_name)
     searched_articles = search_articles(search_name_format)
-    title = f'search results for {article_name}'
 
     return render_template('search.html',articles = searched_articles)

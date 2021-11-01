@@ -10,12 +10,13 @@ api_key = app.config['NEWS_API_KEY']
 
 # Getting the news base url
 base_url = app.config["NEWS_API_BASE_URL"]
+article_url = app.config["NEWS_API_ARTICLES_URL"]
 
 def get_articles(article):
     '''
     Function that gets the json response to our url request
     '''
-    get_articles_url = base_url.format(article,api_key)
+    get_articles_url = article_url.format(article,api_key)
 
     with urllib.request.urlopen(get_articles_url) as url:
         get_articles_data = url.read()
@@ -44,8 +45,9 @@ def process_articles(articles_list):
         description = article_item.get('description')
         urlToImage = article_item.get('urlToImage')
         publishedAt = article_item.get('publishedAt')
+        url = article_item.get('url')
 
-        articles_object = Articles(author,title,description,urlToImage,publishedAt)
+        articles_object = Articles(author,title,description,urlToImage,publishedAt,url)
         articles_results.append(articles_object)
     return articles_results
 
@@ -93,7 +95,7 @@ def process_sources(sources_list):
     return sources_results
 
 def search_articles(article_name):
-    search_article_url = 'https://newsapi.org/v2/everything?q={}&apiKey={}'.format(api_key,article_name)
+    search_article_url = 'https://newsapi.org/v2/top-headlines?sources={}&apiKey={}'.format(api_key,article_name)
     with urllib.request.urlopen(search_article_url) as url:
         search_article_data = url.read()
         search_article_response = json.loads(search_article_data)

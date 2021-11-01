@@ -1,13 +1,13 @@
 {% extends 'base.html'%}
 {% import 'macros.html' as macro%}
 {% block content %}
-<div class="container-fluid" id="allsources">
+<div class="container-fluid" id="allarticles">
     <div class="overlay container-fluid">    
-        <h2 class="text-center headers">Technology Articles</h2>
-        {{macro.display_articles(tech)}}
+        <h2 class="text-center headers">Tesla Articles</h2>
+        {{macro.display_articles(tesla)}}
 
-        <h2 class="text-center headers">Health News Articles</h2>
-        {{macro.display_articles(health)}}
+        <h2 class="text-center headers">Apple News Articles</h2>
+        {{macro.display_articles(apple)}}
     </div>
 </div>
 {% endblock %}
