@@ -1,10 +1,10 @@
 from flask import render_template
-from app import app
-from app.models import articles,sources
-from .request import get_sources,get_articles,search_articles
+from . import main
+from ..models import Articles,Sources
+from ..request import get_sources,get_articles,search_articles
 
 # Views
-@app.route('/')
+@main.route('/')
 def index():
 
     '''
@@ -17,7 +17,7 @@ def index():
 
     return render_template('index.html', title = title,general=general_news,business=business_news,sports=sports_news)
 
-@app.route('/NewsArticles')
+@main.route('/NewsArticles')
 def NewsArticles():
     """
     View that would return news articles
@@ -27,7 +27,7 @@ def NewsArticles():
 
     return render_template('articles.html',tesla = tesla_news,apple = apple_news)
 
-@app.route('/search/<article_name>')
+@main.route('/search/<article_name>')
 def articleSearch(article_name):
     '''
     Function that returns the searched article
